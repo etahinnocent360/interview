@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { TriangleService } from './triangle.service';
 import { TriangleDto } from './triangleDto';
 
@@ -12,5 +12,18 @@ export class TriangleController {
     @Get('triangles')
     findAll(){
         return this.triangleService.findAll()
+    }
+    @Delete(':id')
+    deletById(@Param('id') id: number) {
+        return this.triangleService.deleteById(id)
+    }
+
+    @Get(':id')
+    findById(@Param('id') id: number) {
+        return this.triangleService.findById(id)
+    }
+    @Put(':id')
+    updateById(@Param('id') id: number, @Body() triangleDto: TriangleDto) {
+        return this.triangleService.updateOne(id, triangleDto)
     }
 }

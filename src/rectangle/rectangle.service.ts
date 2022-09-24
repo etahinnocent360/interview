@@ -56,4 +56,54 @@ export class RectangleService {
 
         }
     }
+    async deleteById(id: number) {
+        try {
+            const deleteRectangle = await this.rectangleRepo.delete(id)
+            return deleteRectangle
+        } catch (error) {
+
+        }
+    }
+    async findById(id: number) {
+        try {
+            const findRectangle = await this.rectangleRepo.findOne({ where: { id } })
+            return findRectangle
+        } catch (error) {
+
+        }
+    }
+    async updateOne(id: number, squareDto: SquareDto) {
+        const { name, area, width, height, perimeter, units, } = squareDto
+        try {
+            if(height === width){
+                return{
+                    message:'A rectangle can not have equal height and width'
+                }
+            }
+            if (name === TypeEnum.AREA) {
+                const squareName = await this.rectangleRepo.findOne({ where: { id } })
+                const updateById = await this.rectangleRepo.update(id, {
+                    name: squareName.name,
+                    height,
+                    width,
+                    area: height * width,
+                    units
+                })
+                return updateById
+            }
+            if (name === TypeEnum.PERIMETER) {
+                const squareName = await this.rectangleRepo.findOne({ where: { id } })
+                const updateById = await this.rectangleRepo.update(id, {
+                    name: squareName.name,
+                    height,
+                    width,
+                    perimeter: 2 * (width + height),
+                    units
+                })
+                return updateById
+            }
+        } catch (error) {
+
+        }
+    }
 }

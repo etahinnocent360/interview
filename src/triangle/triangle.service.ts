@@ -53,4 +53,52 @@ export class TriangleService {
 
     }
    }
+   async deleteById(id: number) {
+    try {
+        const deleteRectangle = await this.triangleRepo.delete(id)
+        return deleteRectangle
+    } catch (error) {
+
+    }
+}
+async findById(id: number) {
+    try {
+        const findRectangle = await this.triangleRepo.findOne({ where: { id } })
+        return findRectangle
+    } catch (error) {
+
+    }
+}
+async updateOne(id: number, squareDto: TriangleDto) {
+    const { name, height, base, area, perimeter, units,sideA, sideB} = squareDto
+    try {
+    
+        if (name === TypeEnum.AREA) {
+            const squareName = await this.triangleRepo.findOne({ where: { id } })
+            const updateById = await this.triangleRepo.update(id, {
+                name: squareName.name,
+                height,
+                base,
+                area: (base*height)/2,
+                units
+            })
+            return updateById
+        }
+        if (name === TypeEnum.PERIMETER) {
+            const squareName = await this.triangleRepo.findOne({ where: { id } })
+            const updateById = await this.triangleRepo.update(id, {
+                name: squareName.name,
+                height,
+                sideA,
+                sideB,
+                base,
+                perimeter: base + sideA + sideB,
+                units
+            })
+            return updateById
+        }
+    } catch (error) {
+
+    }
+}
 }
