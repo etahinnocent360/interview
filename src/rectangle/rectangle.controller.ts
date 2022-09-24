@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { SquareDto } from 'src/square/square.dto';
 import { RectangleService } from './rectangle.service';
 
@@ -8,5 +8,9 @@ export class RectangleController {
     @Post()
     async SquareValues(@Body() squareDto:SquareDto){
         return this.rectangleService.rectangleAreaPerimeter(squareDto)
+    }
+    @Get('rectangles')
+    findAll(){
+        return this.rectangleService.findAll()
     }
 }

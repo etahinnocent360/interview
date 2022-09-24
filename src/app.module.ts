@@ -10,6 +10,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SquareRepository } from './squar/square.repository';
 import { CubeModule } from './cube/cube.module';
 import { RectangleRepository } from './rectangle/rectangleRepositary';
+import { CircleRepository } from './circle/circleRepository';
+import { CubeRepository } from './cube/cubeRepository';
+import { TriangleRepository } from './triangle/triangleRepo';
 
 @Module({
   imports: [SquareModule, CircleModule, RectangleModule, TriangleModule, ConfigModule.forRoot(),
@@ -22,7 +25,7 @@ import { RectangleRepository } from './rectangle/rectangleRepositary';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DATABASE'),
         port: parseInt(configService.get('DB_PORT')) || 3306,
-        entities: [SquareRepository, RectangleRepository],
+        entities: [SquareRepository, RectangleRepository, CubeRepository, CircleRepository, TriangleRepository],
         synchronize: true,
       }),
       inject: [ConfigService],

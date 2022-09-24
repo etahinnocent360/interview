@@ -48,4 +48,12 @@ export class RectangleService {
             console.log(error)
         }
     }
+    async findAll(){
+        try{
+            const allRectangles = await this.rectangleRepo.find()
+            return allRectangles
+        } catch(error){
+
+        }
+    }
 }
