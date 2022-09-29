@@ -10,9 +10,9 @@ export class CircleRepository {
     name: TypeEnum
     @Column()
     radius: number
-    @Column({nullable: true})
+    @Column({nullable: true, precision:60, scale:10, type:'decimal', default:0})
     perimeter: number
-    @Column({nullable: true})
+    @Column({nullable: true, precision:60, scale:10, type:'decimal', default:0})
     area: number
     @Column({type:'enum', enum:['m', 'cm', 'km', 'mm', 'dm'], default:'m'})
     units:Measurementunits
