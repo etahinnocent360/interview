@@ -5,10 +5,12 @@
 
 ## run the following command to install project dependecies
 
+
 ```bash
 $ npm install
 ```
-
+## create a .env file in the root directory of this project and use the example.env as your guide
+## the database name in the example.env file stays thesame
 ## Running the app
 
 ```bash
