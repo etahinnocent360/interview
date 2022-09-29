@@ -11,19 +11,6 @@ export class TriangleService {
    async triangleParams(triangleDto:TriangleDto){
     try {
         const { name, height, base, area, perimeter, units,sideA, sideB } = triangleDto
-      if(base > 0){
-      
-        if (name === TypeEnum.AREA && height > 0 && base > 0) {
-            console.log(name)
-            const newArea = this.triangleRepo.save({
-                name,
-                height,
-                base,
-                area: (base*height)/2,
-                units
-            })
-            return newArea
-        }
         if (name === TypeEnum.PERIMETER) {
             console.log(name)
             const newPerimeter = this.triangleRepo.save({
@@ -37,8 +24,22 @@ export class TriangleService {
             })
             return newPerimeter
         }
+      if(base > 0){
+      
+        if (name === TypeEnum.AREA && height > 0 && base > 0) {
+            console.log(name)
+            const newArea = this.triangleRepo.save({
+                name,
+                height,
+                base,
+                area: (base*height)/2,
+                units
+            })
+            return newArea
+        }
+        
       } else {
-        return 'height or width can not be less than or equal to zero'
+        return 'height or base can not be less than or equal to zero'
       }
     } catch (error){
         console.log(error)
@@ -76,7 +77,7 @@ async updateOne(id: number, squareDto: TriangleDto) {
         if (name === TypeEnum.AREA) {
             const squareName = await this.triangleRepo.findOne({ where: { id } })
             const updateById = await this.triangleRepo.update(id, {
-                name: squareName.name,
+                name,
                 height,
                 base,
                 area: (base*height)/2,
@@ -87,7 +88,7 @@ async updateOne(id: number, squareDto: TriangleDto) {
         if (name === TypeEnum.PERIMETER) {
             const squareName = await this.triangleRepo.findOne({ where: { id } })
             const updateById = await this.triangleRepo.update(id, {
-                name: squareName.name,
+                name,
                 height,
                 sideA,
                 sideB,

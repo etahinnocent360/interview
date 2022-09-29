@@ -9,7 +9,6 @@ export class CircleRepository {
     @Column()
     name: TypeEnum
     @Column()
-    
     radius: number
     @Column({nullable: true, precision:60, scale:10, type:'decimal', default:0})
     perimeter: number
