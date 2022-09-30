@@ -87,6 +87,7 @@ export class RectangleService {
                     height,
                     width,
                     area: height * width,
+                    perimeter: 2 * (width + height),
                     units
                 })
                 return updateById
@@ -98,6 +99,7 @@ export class RectangleService {
                     height,
                     width,
                     perimeter: 2 * (width + height),
+                    area: height * width,
                     units
                 })
                 return updateById

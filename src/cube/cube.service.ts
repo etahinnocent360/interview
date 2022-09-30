@@ -12,13 +12,27 @@ export class CubeService {
     async cubeAreaPerimeter(cubeValues: SquareDto) {
         try {
             const { name, height, width, area, perimeter, units } = cubeValues
+
+            if (name === TypeEnum.PERIMETER && height === width) {
+                console.log(name)
+                const newPerimeter = await this.cubeRepo.save({
+                    name,
+                    height,
+                    width,
+                    perimeter: 12 * (height),
+                    units
+                })
+                return newPerimeter
+            }
+
+           
             if (height > 0 && width > 0) {
                 if (height !== width) {
                     return {
                         message: 'height must be equal to the width'
                     }
                 }
-                if (name === TypeEnum.AREA) {
+                if (name === TypeEnum.AREA || height === width) {
                     console.log(name)
                     const newArea = await this.cubeRepo.save({
                         name,
@@ -30,17 +44,7 @@ export class CubeService {
                     })
                     return newArea
                 }
-                if (name === TypeEnum.PERIMETER && height === width) {
-                    console.log(name)
-                    const newPerimeter = await this.cubeRepo.save({
-                        name,
-                        height,
-                        width,
-                        perimeter: 12 * (height),
-                        units
-                    })
-                    return newPerimeter
-                }
+
             } else {
                 return 'height or width can not be less than or equal to zero'
             }
@@ -82,6 +86,7 @@ export class CubeService {
                     height,
                     width,
                     area: 6 * (height * width),
+                    perimeter: 12 * (height),
                     units
                 })
                 return updateById
@@ -93,6 +98,7 @@ export class CubeService {
                     height,
                     width,
                     perimeter: 12 * (height),
+                    area: 6 * (height * width),
                     units
                 })
                 return updateById

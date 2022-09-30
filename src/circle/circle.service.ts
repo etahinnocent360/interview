@@ -69,6 +69,7 @@ export class CircleService {
                     name: findCircle.name,
                     radius,
                     area: radius * radius * (Math.PI),
+                    perimeter: 2 * (Math.PI) * radius,
                     units
                 })
                 return updateById
@@ -80,6 +81,7 @@ export class CircleService {
                     name: findCircle.name,
                     radius,
                     perimeter: 2 * (Math.PI) * radius,
+                    area: radius * radius * (Math.PI),
                     units
                 })
                 return updateById

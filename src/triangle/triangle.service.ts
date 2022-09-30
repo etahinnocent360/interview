@@ -81,6 +81,7 @@ async updateOne(id: number, squareDto: TriangleDto) {
                 height,
                 base,
                 area: (base*height)/2,
+                perimeter: base + sideA + sideB,
                 units
             })
             return updateById
@@ -94,6 +95,7 @@ async updateOne(id: number, squareDto: TriangleDto) {
                 sideB,
                 base,
                 perimeter: base + sideA + sideB,
+                area: (base*height)/2,
                 units
             })
             return updateById

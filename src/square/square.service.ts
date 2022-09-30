@@ -85,6 +85,7 @@ export class SquareService {
                     height,
                     width,
                     area: height * width,
+                    perimeter: 4 * height,
                     units
                 })
                 return updateById
@@ -96,6 +97,7 @@ export class SquareService {
                     height,
                     width,
                     perimeter: 4 * height,
+                    area: height * width,
                     units
                 })
                 return updateById
